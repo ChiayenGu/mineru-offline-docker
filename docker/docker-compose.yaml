@@ -1,7 +1,7 @@
 version: '3'
 services:
   mineru-web:
-    image: crpi-omrdia1j1e0m0x6k.cn-hangzhou.personal.cr.aliyuncs.com/chiayen/mineru-web:v1.2.2
+    image: crpi-omrdia1j1e0m0x6k.cn-hangzhou.personal.cr.aliyuncs.com/chiayen/mineru-web:v1.2.2-fix
     ports:
       - "5559:5559"  # 将容器内的 5559 端口映射到主机的 5559 端口
     deploy:

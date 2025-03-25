@@ -1,19 +1,19 @@
 # MinerU 集成镜像项目
 
-将 [MinerU](https://github.com/opendatalab/MinerU) (v1.2.2) 打包为全离线 Docker 整合方案。
+将 [MinerU](https://github.com/opendatalab/MinerU) (v1.2.2) 打包为离线 Docker 整合方案。
 
 ## 功能特性
 
 * 📦 集成 MinerU 1.2.2
 * 🖥️ 内置 MinerU-WebDemo 可视化界面和离线swagger文档
-* 🐳 开箱即用的 Docker 容器化部署，容器内已下好需要的模型
+* 🐳 开箱即用的 Docker 容器化部署，容器内已下好需要的所有模型
 * 🔧 支持环境变量配置
 
 ## 快速开始
 
 ```bash
-docker pull crpi-omrdia1j1e0m0x6k.cn-hangzhou.personal.cr.aliyuncs.com/chiayen/mineru-web:v1.2.2
-docker run -itd -p 5559:5559 crpi-omrdia1j1e0m0x6k.cn-hangzhou.personal.cr.aliyuncs.com/chiayen/mineru-web:v1.2.2 
+docker pull crpi-omrdia1j1e0m0x6k.cn-hangzhou.personal.cr.aliyuncs.com/chiayen/mineru-web:v1.2.2-fix
+docker run -itd --gpus all -p 5559:5559 crpi-omrdia1j1e0m0x6k.cn-hangzhou.personal.cr.aliyuncs.com/chiayen/mineru-web:v1.2.2-fix
 ```
 
 - 请求`http://localhost:5559` MinerU-WebUI 界面。

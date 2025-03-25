@@ -47,13 +47,20 @@ RUN /bin/bash -c "pip3 install modelscope && \
     python3 download_models.py && \
     sed -i 's|cpu|cuda|g' /root/magic-pdf.json"
 
-# 创建必要的目录 下载paddleocr模型
-RUN mkdir -p /root/.paddleocr/whl/det/ch/ch_PP-OCRv4_det_infer \
-    && mkdir -p /root/.paddleocr/whl/rec/ch/ch_PP-OCRv4_rec_infer \
-    && mkdir -p /root/.paddleocr/whl/cls/ch_ppocr_mobile_v2.0_cls_infer \
-    && wget -O /root/.paddleocr/whl/det/ch/ch_PP-OCRv4_det_infer/ch_PP-OCRv4_det_infer.tar https://paddleocr.bj.bcebos.com/PP-OCRv4/chinese/ch_PP-OCRv4_det_infer.tar \
-    && wget -O /root/.paddleocr/whl/rec/ch/ch_PP-OCRv4_rec_infer/ch_PP-OCRv4_rec_infer.tar https://paddleocr.bj.bcebos.com/PP-OCRv4/chinese/ch_PP-OCRv4_rec_infer.tar \
-    && wget -O /root/.paddleocr/whl/cls/ch_ppocr_mobile_v2.0_cls_infer/ch_ppocr_mobile_v2.0_cls_infer.tar https://paddleocr.bj.bcebos.com/dygraph_v2.0/ch/ch_ppocr_mobile_v2.0_cls_infer.tar
+## 创建必要的目录 下载paddleocr模型
+#RUN mkdir -p /root/.paddleocr/whl/det/ch/ch_PP-OCRv4_det_infer \
+#    && mkdir -p /root/.paddleocr/whl/rec/ch/ch_PP-OCRv4_rec_infer \
+#    && mkdir -p /root/.paddleocr/whl/cls/ch_ppocr_mobile_v2.0_cls_infer \
+#    && wget -O /root/.paddleocr/whl/det/ch/ch_PP-OCRv4_det_infer.tar https://paddleocr.bj.bcebos.com/PP-OCRv4/chinese/ch_PP-OCRv4_det_infer.tar \
+#    && wget -O /root/.paddleocr/whl/rec/ch/ch_PP-OCRv4_rec_infer.tar https://paddleocr.bj.bcebos.com/PP-OCRv4/chinese/ch_PP-OCRv4_rec_infer.tar \
+#    && wget -O /root/.paddleocr/whl/cls/ch_ppocr_mobile_v2.0_cls_infer.tar https://paddleocr.bj.bcebos.com/dygraph_v2.0/ch/ch_ppocr_mobile_v2.0_cls_infer.tar\
+#    # 解压det模型
+#    && tar -xf /root/.paddleocr/whl/det/ch/ch_PP-OCRv4_det_infer.tar \
+#    # 解压rec模型
+#    && tar -xf /root/.paddleocr/whl/rec/ch/ch_PP-OCRv4_rec_infer.tar  \
+#    # 解压cls模型
+#    && tar -xf /root/.paddleocr/whl/cls/ch_ppocr_mobile_v2.0_cls_infer.tar
+COPY ./.paddleocr /root/.paddleocr
 
 EXPOSE 5559
 
