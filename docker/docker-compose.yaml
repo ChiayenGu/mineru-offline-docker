@@ -1,0 +1,46 @@
+version: '3'
+services:
+  mineru-web:
+    image: crpi-omrdia1j1e0m0x6k.cn-hangzhou.personal.cr.aliyuncs.com/chiayen/mineru-web:v1.2.2
+    ports:
+      - "5559:5559"  # 将容器内的 5559 端口映射到主机的 5559 端口
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: "nvidia"
+              count: "all"
+              capabilities: [ "gpu" ]
+    environment:
+      # 基本配置
+      DEBUG: 'false'
+      IP: 'localhost'
+      PORT: '5559'
+      LOG_LEVEL: 'DEBUG'
+      SQLALCHEMY_TRACK_MODIFICATIONS: 'true'
+      PROPAGATE_EXCEPTIONS: 'true'
+      PREFERRED_URL_SCHEME: 'http'
+      # 安全配置
+      SECRET_KEY: 'your_secret_key'
+      JWT_SECRET_KEY: 'your_jwt_secret_key'
+      JWT_ACCESS_TOKEN_EXPIRES: '3600'
+      # 文件存储配置
+      PDF_UPLOAD_FOLDER: 'upload_pdf'
+      PDF_ANALYSIS_FOLDER: 'analysis_pdf'
+      REACT_APP_DIST: './dist/'
+      FILE_API: '/api/v2/analysis/pdf_img?as_attachment=False'
+      # 数据库配置
+      DATABASE_TYPE: 'sqlite'
+      DATABASE_PATH: 'config/mineru_web.db'
+      # 如果使用mysql数据库 取消注释以下配置
+    #      MYSQL_USER: 'root'
+    #      MYSQL_PASSWORD: 'password'
+    #      MYSQL_HOST: 'localhost'
+    #      MYSQL_PORT: '3306'
+    #      MYSQL_DATABASE: 'mineru_web'
+    volumes:
+      - ./volume/db/mineru_web.db:/opt/webdemo/config/mineru_web.db # sqlite数据库
+      - ./volume/static:/opt/webdemo/static # 上传文件和分析后的结果
+      - ./volume/log:/opt/webdemo/log # 前端代码
+#      - ../web_demo/api:/opt/webdemo/api # 后端代码
+#      - ../web_demo/dist:/opt/webdemo/dist # 前端代码
